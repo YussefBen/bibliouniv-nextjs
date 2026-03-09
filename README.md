@@ -1,5 +1,6 @@
-```markdown
 # BiblioUniv — Gestion de Bibliothèque Universitaire
+
+# Concepteurs: BEN CHOUCHANE Youssef et DA SILVA MESQUITA Rafael
 
 Application web Next.js + Prisma + MySQL pour la gestion des emprunts et des ouvrages d'une bibliothèque universitaire.
 
