@@ -59,8 +59,18 @@ export default async function DashboardPage() {
                 <p className="text-sm text-gray-600">Emprunté le : {new Date(borrowing.borrowedAt).toLocaleDateString()}</p>
                 <p className="text-sm text-gray-600">Retour prévu le : {new Date(borrowing.dueDate).toLocaleDateString()}</p>
               </div>
-              {/* Le bouton "Rendre" sera implémenté dans la partie 2 */}
-              <span className="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded">En cours</span>
+<form action={async () => {
+  "use server";
+  const { returnBook } = await import("@/actions/borrowingActions");
+  await returnBook(borrowing.id, borrowing.bookId);
+}}>
+  <button 
+    type="submit"
+    className="bg-red-500 hover:bg-red-600 text-white text-sm font-medium px-4 py-2 rounded-md transition-colors shadow-sm"
+  >
+    Rendre le livre
+  </button>
+</form>              <span className="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded">En cours</span>
             </div>
           ))}
         </div>
