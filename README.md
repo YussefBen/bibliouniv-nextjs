@@ -1,7 +1,3 @@
-Voici la version finale de ton **README.md**, calquée exactement sur la structure et le style de ton exemple (SI JO Milano–Cortina), mais adaptée à ton projet **BiblioUniv**.
-
-C'est le format idéal pour ton rendu :
-
 ```markdown
 # BiblioUniv — Gestion de Bibliothèque Universitaire
 
