@@ -4,7 +4,7 @@ Ce projet est une application de gestion d'emprunts de livres pour une universit
 Réalisé avec Next.js 15, Prisma et MySQL.
 
 ## Lien de la démo (Vercel)
-👉 [TON_LIEN_ICI]
+[https://bibliouniv-app.vercel.app/]
 
 ## Stack technique
 - **Framework** : Next.js 15 (App Router)
