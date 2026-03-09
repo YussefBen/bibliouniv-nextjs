@@ -1,74 +1,111 @@
-BiblioUniv — Gestion de Bibliothèque Universitaire
+Voici la version finale de ton **README.md**, calquée exactement sur la structure et le style de ton exemple (SI JO Milano–Cortina), mais adaptée à ton projet **BiblioUniv**.
 
-Concepteurs: BEN CHOUCHANE Youssef et DA SALVA MESQUITA Rafael
+C'est le format idéal pour ton rendu :
 
-Application web Next.js 15 + Prisma + MySQL pour la gestion moderne des emprunts et des ouvrages universitaires.
+```markdown
+# BiblioUniv — Gestion de Bibliothèque Universitaire
 
-Prérequis
+Application web Next.js + Prisma + MySQL pour la gestion des emprunts et des ouvrages d'une bibliothèque universitaire.
+
+## Prérequis
+
 Avant de lancer le projet, il faut avoir installé :
 
-Node.js (version 20 ou supérieure recommandée)
+- **Node.js** (version 20 recommandée)
+- **npm**
+- **Un service MySQL** (Aiven recommandé ou MySQL Workbench en local)
 
-npm (inclus avec Node.js)
+---
 
-Un compte Aiven (ou un serveur MySQL local)
+# 1. Déploiement en production (Vercel)
 
-1. Déploiement en Production (Vercel)
-Étape 1 — Configuration sur Vercel
-Importer le projet depuis GitHub sur le tableau de bord Vercel.
+## Étape 1 — Configurer le projet sur Vercel
+Importer le dépôt GitHub sur votre interface Vercel.
 
-Étape 2 — Configurer les variables d'environnements
-Dans les paramètres du projet Vercel, ajouter les clés suivantes :
+---
 
-DATABASE_URL : Votre lien de connexion MySQL (Aiven)
+## Étape 2 — Configurer les variables d'environnements 
+Dans les paramètres Vercel (**Settings > Environment Variables**), ajouter :
 
-JWT_ACCESS_SECRET : Une clé secrète pour les Access Tokens
+```bash
+DATABASE_URL=votre_url_mysql_aiven
+JWT_ACCESS_SECRET=votre_secret_access_32_caracteres
+JWT_REFRESH_SECRET=votre_secret_refresh_32_caracteres
 
-JWT_REFRESH_SECRET : Une clé secrète pour les Refresh Tokens
+```
 
-Étape 3 — Accéder à l'application
-L'application sera disponible à l'adresse fournie par Vercel (ex: https://bibliouniv-app.vercel.app/).
+## Étape 3 — Accéder à l'application
 
-2. Lancement en local (Développement)
-Étape 1 — Extraire le projet
-Décompresser le fichier .zip ou cloner le dépôt dans un dossier local :
+L'application sera disponible à l'adresse suivante :
 
-Bash
-git clone https://github.com/YussefBen/bibliouniv-nextjs.git
-Étape 2 — Installer les dépendances
+```bash
+[https://bibliouniv-app.vercel.app/](https://bibliouniv-app.vercel.app/)
+
+```
+
+---
+
+# 2. Lancement en local (sans Docker)
+
+## Étape 1 — Extraire le projet
+
+Décompresser le fichier `.zip` ou cloner le dépôt dans un dossier local.
+
+---
+
+## Étape 2 — Installer les dépendances
+
 Ouvrir un terminal à la racine du projet puis exécuter :
 
-Bash
+```bash
 npm install
-Étape 3 — Configurer les variables d'environnements
-Créer un fichier .env à la racine avec le contenu suivant :
 
-Extrait de code
+```
+
+## Étape 3 — Configurer les variables d'environnements
+
+Créer un fichier: `.env`
+
+Avec le contenu suivant :
+
+```bash
 DATABASE_URL="mysql://user:password@host:port/defaultdb"
-JWT_ACCESS_SECRET="votre_secret_access_ici"
-JWT_REFRESH_SECRET="votre_secret_refresh_ici"
-Étape 4 — Synchroniser la base de données
-Pour créer les tables (User, Book, Borrowing) sur votre instance MySQL, exécutez :
+JWT_ACCESS_SECRET="change_me_super_secret_access"
+JWT_REFRESH_SECRET="change_me_super_secret_refresh"
 
-Bash
+```
+
+## Étape 4 — Synchroniser la base de données
+
+Pour créer les tables et synchroniser le schéma avec Prisma, exécutez :
+
+```bash
+npx prisma generate
 npx prisma db push
-Étape 5 — Lancer l'application
+
+```
+
+## Étape 5 — Lancer l'application
+
 Ouvrir un terminal à la racine du projet puis exécuter :
 
-Bash
+```bash
 npm run dev
+
+```
+
 L’application sera accessible à l’adresse :
+
+```bash
 http://localhost:3000
 
-3. Fonctionnalités implémentées
-Authentification sécurisée : Double token JWT (Access & Refresh) stockés en cookies HttpOnly.
+```
 
-Gestion métier :
 
-Limitation stricte à 3 emprunts simultanés par étudiant.
+## 3. Règles métier implémentées
 
-Durée d'emprunt fixée à 14 jours.
+* **Sécurité** : Authentification via double token JWT (Access/Refresh) en cookies HttpOnly.
+* **Limites d'emprunt** : Maximum 3 livres par utilisateur simultanément.
+* **Durée** : Emprunts fixés à 14 jours.
+* **Disponibilité** : Seuls les livres en stock peuvent être sélectionnés pour un emprunt.
 
-Vérification de la disponibilité en temps réel.
-
-Interface : Catalogue paginé avec recherche dynamique et espace profil personnel.
